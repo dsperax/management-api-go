@@ -1,4 +1,51 @@
+basePath: /
+definitions:
+  entities.ErrorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  entities.User:
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+host: localhost:8080
 info:
   contact: {}
-paths: {}
+  description: API de gerenciamento de usuários.
+  title: Management API
+  version: "1.0"
+paths:
+  /users/{id}:
+    get:
+      description: Retorna os dados de um usuário específico
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/entities.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/entities.ErrorResponse'
+      summary: Obter usuário por ID
+      tags:
+      - users
+schemes:
+- http
 swagger: "2.0"

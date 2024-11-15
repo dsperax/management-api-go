@@ -21,6 +21,9 @@ compose-up:
 compose-down:
 	docker compose down
 
+swagger:
+	@swag init -g main.go -o ./docs -d ./cmd/api,./internal
+
 setup-db: compose-up
 	@echo "Aguardando o MySQL iniciar..."
 	@until docker compose exec mysql mysqladmin ping -uuser -puserpassword --silent; do\
