@@ -110,6 +110,7 @@ Use tools like Postman or curl to interact with the API.
 3. Commit your changes (git commit -m 'Add new feature').
 4. Push to the branch (git push origin feature/new-feature).
 5. Open a Pull Request.
+6. Wait for approval.
 
 <hr>
 
@@ -225,3 +226,4 @@ Utilize ferramentas como Postman ou curl para interagir com a API.
 3. Commit suas alterações (git commit -m 'Adiciona nova feature').
 4. Faça o push para a branch (git push origin feature/nova-feature).
 5. Abra um Pull Request.
+6. Espere a aprovação.
