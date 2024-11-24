@@ -8,10 +8,12 @@ import (
 	"github.com/segmentio/kafka-go"
 )
 
+// ActiveProducer é responsável por publicar eventos de ativação de usuário no Kafka.
 type ActiveProducer struct {
 	Writer *kafka.Writer
 }
 
+// NewActiveProducer cria uma nova instância de ActiveProducer com as configurações fornecidas.
 func NewActiveProducer(brokers []string, topic string) *ActiveProducer {
 	writer := kafka.NewWriter(kafka.WriterConfig{
 		Brokers:  brokers,
@@ -23,6 +25,7 @@ func NewActiveProducer(brokers []string, topic string) *ActiveProducer {
 	}
 }
 
+// PublishUserActive publica um evento de usuário ativo no Kafka.
 func (kp *ActiveProducer) PublishUserActive(name string) error {
 	msg := kafka.Message{
 		Key:   []byte(fmt.Sprintf("User-%s", name)),
@@ -38,6 +41,7 @@ func (kp *ActiveProducer) PublishUserActive(name string) error {
 	return nil
 }
 
+// Close encerra a conexão do produtor Kafka.
 func (kp *ActiveProducer) Close() error {
 	return kp.Writer.Close()
 }

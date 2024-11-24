@@ -1,4 +1,4 @@
-.PHONY: build run test docker-build docker-run compose-up compose-down setup-db clean
+.PHONY: build run test lint staticcheck docker-build docker-run compose-up compose-down setup-db clean swagger open-grafana
 
 build:
 	go build -o bin/main ./cmd/api/main.go
@@ -8,6 +8,22 @@ run:
 
 test:
 	go test ./... -v
+
+lint:
+	@echo "Executando Golint..."
+	@go install golang.org/x/lint/golint@latest
+	@OUTPUT=$$(golint ./...); \
+	if [ -n "$$OUTPUT" ]; then \
+		echo "$$OUTPUT"; \
+		exit 1; \
+	else \
+		echo "Nenhum problema encontrado pelo Golint."; \
+	fi
+
+staticcheck:
+	@echo "Executando Staticcheck..."
+	@go install honnef.co/go/tools/cmd/staticcheck@latest
+	@staticcheck ./...
 
 docker-build:
 	docker build -t dsperax/management-api-go .
@@ -40,3 +56,7 @@ clean:
 	else \
 		echo "Operação cancelada."; \
 	fi
+
+open-grafana:
+	@echo "Abrindo Grafana em http://localhost:3000"
+	xdg-open http://localhost:3000 || open http://localhost:3000

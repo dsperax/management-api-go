@@ -104,6 +104,12 @@ The API will be running at http://localhost:8080.
 
 Use tools like Postman or curl to interact with the API.
 
+6. **Grafana:**
+
+    ```
+    http://localhost:3000
+    ```
+
 ## 🤝 How to Contribute
 1. Fork the project.
 2. Create a branch for your feature (git checkout -b feature/new-feature).
@@ -220,6 +226,12 @@ A API estará rodando em http://localhost:8080.
 
 Utilize ferramentas como Postman ou curl para interagir com a API.
 
+6. **Grafana:**
+
+    ```
+    http://localhost:3000
+    ```
+
 ## 🤝 Como Contribuir
 1. Faça um fork do projeto.
 2. Crie uma branch para sua feature (git checkout -b feature/nova-feature).
@@ -227,3 +239,69 @@ Utilize ferramentas como Postman ou curl para interagir com a API.
 4. Faça o push para a branch (git push origin feature/nova-feature).
 5. Abra um Pull Request.
 6. Espere a aprovação.
+
+```
+# TODO
+
+### Passo 1: Configurar o Grafana para Usar o Prometheus como Fonte de Dados
+Após iniciar os serviços, você precisará configurar o Grafana para usar o Prometheus como fonte de dados.
+
+1.1. Acessar o Grafana
+Abra o Grafana no navegador:
+
+arduino
+Copiar código
+http://localhost:3000
+1.2. Login no Grafana
+Usuário: admin
+Senha: admin
+Você será solicitado a alterar a senha após o primeiro login.
+
+1.3. Adicionar Fonte de Dados
+Clique em "Add your first data source" ou vá em Configuration (engrenagem) > Data Sources e clique em "Add data source".
+
+Selecione Prometheus.
+
+Configure a fonte de dados:
+
+Name: Prometheus
+URL: http://prometheus:9090
+Access: Server (Default)
+Clique em "Save & Test".
+
+Você deve ver a mensagem "Data source is working".
+
+### Passo 2: Importar um Dashboard para Visualizar as Métricas
+Você pode criar seus próprios dashboards ou importar dashboards existentes.
+
+2.1. Importar um Dashboard Existente
+No Grafana, clique no ícone de "Plus" na barra lateral e selecione "Import".
+
+Importar pelo ID do Dashboard
+
+Você pode usar o ID de um dashboard existente da comunidade. Por exemplo, para um dashboard básico do Go, use o ID "1860".
+Clique em "Load".
+
+Selecione a fonte de dados
+
+Em Prometheus, selecione a fonte de dados que você configurou.
+Clique em "Import".
+
+Agora você deve ver um dashboard com métricas da sua aplicação Go.
+
+### Passo 3: Verificar se as Métricas Estão Sendo Coletadas
+Certifique-se de que o Prometheus está coletando as métricas da sua aplicação.
+
+3.1. Acessar o Prometheus
+Abra o Prometheus no navegador:
+
+arduino
+Copiar código
+http://localhost:9090
+Você pode executar consultas para verificar as métricas disponíveis.
+
+### Passo 8: Testar o Ambiente
+Faça algumas requisições à sua aplicação Go para gerar atividade.
+
+Verifique no Grafana se as métricas estão sendo atualizadas nos dashboards.
+```
