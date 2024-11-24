@@ -10,6 +10,7 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
+// RegisterRoutes registra as rotas da aplicação no router fornecido.
 func RegisterRoutes(router *gin.Engine) {
 	brokers := []string{"localhost:9092"} // Use "kafka:29092" se estiver dentro do Docker
 	topic := "management_user_active"

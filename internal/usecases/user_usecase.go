@@ -5,15 +5,18 @@ import (
 	"github.com/dsperax/management-api-go/internal/domain/repositories"
 )
 
+// KafkaProducer define as operações para publicar mensagens no Kafka.
 type KafkaProducer interface {
 	PublishUserActive(name string) error
 }
 
+// UserUseCase contém a lógica de negócio para operações de usuário.
 type UserUseCase struct {
 	UserRepo      repositories.UserRepository
 	KafkaProducer KafkaProducer
 }
 
+// GetUser retorna um usuário pelo ID fornecido. Retorna um erro se o usuário não for encontrado.
 func (u *UserUseCase) GetUser(id int64) (*entities.User, error) {
 	user, err := u.UserRepo.FindByID(id)
 	if err != nil {

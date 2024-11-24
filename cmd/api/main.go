@@ -5,6 +5,7 @@ import (
 
 	"github.com/dsperax/management-api-go/internal/infra/database"
 	"github.com/dsperax/management-api-go/internal/interfaces/routes"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 
 	_ "github.com/dsperax/management-api-go/docs" // Importa os documentos gerados pelo Swagger
 	"github.com/gin-gonic/gin"
@@ -27,5 +28,6 @@ func main() {
 
 	router := gin.Default()
 	routes.RegisterRoutes(router)
+	router.GET("/metrics", gin.WrapH(promhttp.Handler()))
 	router.Run(":8080")
 }
